@@ -17,7 +17,7 @@ def box_bounding(im, color=(114, 114, 114)):
     im = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  # add border
     return im, ratio, (width, height)
 
-img = cv2.imread('net2.jpg')
+img = cv2.imread('arquivos/corte5.JPG')
 session = ort.InferenceSession("plate.onnx", providers=['CPUExecutionProvider'])
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 image = img.copy()
@@ -34,12 +34,13 @@ outputs = session.run(outname, inp)[0]
 ori_images = [img.copy()]
 
 for i,(batch_id,x0,y0,x1,y1,cls_id,score) in enumerate(outputs):
-    image = ori_images[int(batch_id)]
-    box = np.array([x0,y0,x1,y1])
-    box -= np.array(width_height*2)
-    box /= ratio
-    box = box.round().astype(np.int32).tolist()
-    plate = image[box[1]:box[3],box[0]:box[2]]
-    grayPlate = cv2.cvtColor(plate, cv2.COLOR_BGR2GRAY)
-    th2 = cv2.adaptiveThreshold(grayPlate,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,21,4)
-    cv2.imwrite('plate6.JPG', th2)
+    if(score > 0.9):
+        image = ori_images[int(batch_id)]
+        box = np.array([x0,y0,x1,y1])
+        box -= np.array(width_height*2)
+        box /= ratio
+        box = box.round().astype(np.int32).tolist()
+        plate = image[box[1]:box[3],box[0]:box[2]]
+        grayPlate = cv2.cvtColor(plate, cv2.COLOR_BGR2GRAY)
+        th2 = cv2.adaptiveThreshold(grayPlate,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,21,4)
+        cv2.imwrite(f'plate6{i}.JPG', th2)
