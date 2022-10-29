@@ -1,17 +1,27 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2extn.RoundProgressBar import roundProgressBar
 import sys
+import time
 
 class Ui_MainWindow(object):
     def click_start(self):
         self.input_text.hide()
         self.button_start.hide()
         self.round_progressbar.rpb_setRange(0, 100)
-        self.round_progressbar.rpb_setValue(30)
+        self.round_progressbar.rpb_setValue(0)
         self.round_progressbar.rpb_setBarStyle('Line')
         self.round_progressbar.rpb_enableText(False)
+        self.worker = Worker()
+        self.worker.updateProgress.connect(self.setProgress)
+        self.round_progressbar.minimum = 1
+        self.round_progressbar.maximum = 100
         self.round_progressbar.show()
+        self.retranslateUi()
+    def setProgress(self, progress):
+        self.round_progressbar.rpb_setValue(progress)
 
+    def retranslateUi(self):
+        self.worker.start()
     def __init__(self):
         super().__init__()
         self.window = QtWidgets.QWidget()
@@ -62,6 +72,18 @@ class Ui_MainWindow(object):
         self.window.show()
         sys.exit(app.exec_())
 
+class Worker(QtCore.QThread):
+    updateProgress = QtCore.Signal(int)
+    def __init__(self):
+        QtCore.QThread.__init__(self)
+
+    def run(self):
+        i = 1
+        while(True):
+            time.sleep(0.1)
+            self.updateProgress.emit(i)
+            if(i == 100):
+                i = 1
 
 if (__name__ == "__main__"):
     app = QtWidgets.QApplication(sys.argv)
