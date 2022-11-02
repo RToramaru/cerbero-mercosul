@@ -75,6 +75,6 @@ for i,(batch_id,x0,y0,x1,y1,cls_id,score) in enumerate(outputs):
             image_resize = cv2.resize(img, (width_resize, height_resize), interpolation = cv2.INTER_AREA)
             _, encode_pjg = cv2.imencode('.jpg', image_resize)
             jpg_as_text = base64.b64encode(encode_pjg)
-            sql = f'INSERT INTO veiculo (placa, data, imagem) VALUES ({plate}, {datetime.datetime.now()}, {jpg_as_text})'
+            sql = f'INSERT INTO veiculo (placa, data, imagem) VALUES ({plate}, {datetime.datetime.now()}, {jpg_as_text[1:]})'
             cur.execute(sql)
 cur.close()
