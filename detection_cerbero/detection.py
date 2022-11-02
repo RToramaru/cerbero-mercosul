@@ -24,7 +24,7 @@ class Detection(str):
             return im, ratio, (width, height)
 
         self.cap = cv2.VideoCapture(video)
-        self.session = ort.InferenceSession("../model_onnx/plate.onnx", providers=['CPUExecutionProvider'])
+        self.session = ort.InferenceSession("model_onnx/plate.onnx", providers=['CPUExecutionProvider'])
         self.reader = easyocr.Reader(['en'], gpu=False)
         self.con = psycopg2.connect(host='localhost', database='cerbero', user='postgres', password='1234')
         self.cur = self.con.cursor()

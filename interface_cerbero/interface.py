@@ -31,7 +31,7 @@ class Ui_MainWindow(object):
         self.window.setObjectName("window")
         desktopRect = QtWidgets.QApplication.primaryScreen().availableGeometry()
         self.window.move(desktopRect.center() - self.window.rect().center())
-        self.window.setStyleSheet("#window{background-image: url(../images/background.jpg);}")
+        self.window.setStyleSheet("#window{background-image: url(images/background.jpg);}")
         self.window.setWindowIcon(QtGui.QIcon("../images/background.jpg"))
         self.label_panel = QtWidgets.QLabel(self.window)
         self.label_panel.setFixedSize(300, 300)
