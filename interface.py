@@ -84,6 +84,7 @@ class Worker(QtCore.QThread):
             self.updateProgress.emit(i)
             if(i == 100):
                 i = 1
+            i += 1
 
 if (__name__ == "__main__"):
     app = QtWidgets.QApplication(sys.argv)

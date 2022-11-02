@@ -1,0 +1,8 @@
+opencv-python==4.6.0.66
+numpy==1.23.4
+onnxruntime==1.13.1
+PyQt5==5.15.7
+PySide2extn==1.0.0
+easyocr==1.6.2
+psycopg2==2.9.5
+pybase64==1.2.3

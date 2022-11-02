@@ -4,4 +4,11 @@ Scripts/
 pyvenv.cfg
 .idea/
 plate.onnx
+share/
+arquivos/
+plate60.JPG
+teste.py
+arquivo.txt
+blank_image0.JPG
+interface.py
 ```
