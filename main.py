@@ -2,6 +2,9 @@ import cv2
 import numpy as np
 import onnxruntime as ort
 import easyocr
+import psycopg2
+import datetime
+import base64
 
 def box_bounding(im, color=(114, 114, 114)):
     shape = im.shape[:2]
@@ -17,9 +20,11 @@ def box_bounding(im, color=(114, 114, 114)):
     im = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  # add border
     return im, ratio, (width, height)
 
-img = cv2.imread('arquivos/image4.JPG')
+img = cv2.imread('arquivos/corte1.JPG')
 session = ort.InferenceSession("plate.onnx", providers=['CPUExecutionProvider'])
 reader = easyocr.Reader(['en'], gpu=False)
+con = psycopg2.connect(host='localhost', database='cerbero', user='postgres', password='postgres123')
+cur = con.cursor()
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 image = img.copy()
 image, ratio, width_height = box_bounding(image)
@@ -62,7 +67,14 @@ for i,(batch_id,x0,y0,x1,y1,cls_id,score) in enumerate(outputs):
         for cnt in contours:
             x, y, w, h = cv2.boundingRect(cnt)
             character_image = th2[y:y+h, x:x+w]
-            character_image = cv2.image = cv2.copyMakeBorder(character_image, (height - h - 20), 20, 10, 10, cv2.BORDER_CONSTANT, None, value = (255,255,255))
+            character_image = cv2.copyMakeBorder(character_image, (height - h - 20), 20, 10, 10, cv2.BORDER_CONSTANT, None, value = (255,255,255))
             result_character_image = np.concatenate((result_character_image, character_image), axis=1)
-            result = reader.readtext(result_character_image, detail = 0)
-
+            plate = reader.readtext(result_character_image, detail = 0)
+            width_resize = int(img.shape[1] * 0.2)
+            height_resize = int(img.shape[0] * 0.2)
+            image_resize = cv2.resize(img, (width_resize, height_resize), interpolation = cv2.INTER_AREA)
+            _, encode_pjg = cv2.imencode('.jpg', image_resize)
+            jpg_as_text = base64.b64encode(encode_pjg)
+            sql = f'INSERT INTO veiculo (placa, data, imagem) VALUES ({plate}, {datetime.datetime.now()}, {jpg_as_text})'
+            cur.execute(sql)
+cur.close()
