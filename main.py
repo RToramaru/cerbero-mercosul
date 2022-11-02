@@ -20,7 +20,7 @@ def box_bounding(im, color=(114, 114, 114)):
     im = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  # add border
     return im, ratio, (width, height)
 
-img = cv2.imread('arquivos/corte1.JPG')
+img = cv2.imread('arquivos/corte2.JPG')
 session = ort.InferenceSession("plate.onnx", providers=['CPUExecutionProvider'])
 reader = easyocr.Reader(['en'], gpu=False)
 con = psycopg2.connect(host='localhost', database='cerbero', user='postgres', password='1234')

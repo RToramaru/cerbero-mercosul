@@ -6,8 +6,9 @@ import psycopg2
 import datetime
 import base64
 
-class Detection:
+class Detection(str):
     def __init__(self, video):
+        super().__init__()
         def box_bounding(im, color=(114, 114, 114)):
             shape = im.shape[:2]
             ratio = min(640 / shape[0], 640 / shape[1])
@@ -23,7 +24,7 @@ class Detection:
             return im, ratio, (width, height)
 
         self.cap = cv2.VideoCapture(video)
-        self.session = ort.InferenceSession("model_onnx/plate.onnx", providers=['CPUExecutionProvider'])
+        self.session = ort.InferenceSession("../model_onnx/plate.onnx", providers=['CPUExecutionProvider'])
         self.reader = easyocr.Reader(['en'], gpu=False)
         self.con = psycopg2.connect(host='localhost', database='cerbero', user='postgres', password='1234')
         self.cur = self.con.cursor()
@@ -88,9 +89,10 @@ class Detection:
                         self.con.commit()
         self.cur.close()
         self.con.close()
-
-class execute():
-    Detection()
+        
+class execute:
+    def execute(video):
+        Detection(video)
 
 if (__name__ == "__main__"):
-    execute()
+    execute().execute('video.mp4')

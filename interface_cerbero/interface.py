@@ -1,25 +1,23 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2extn.RoundProgressBar import roundProgressBar
 import sys
-import time
+from detection_cerbero import detection
+import threading
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(object):     
+        
+    def detection_plate(self):
+        detection.execute.execute(self.input_text.text())
+
     def click_start(self):
         self.input_text.hide()
         self.button_start.hide()
         self.label_detection.show()
-        self.round_progressbar.rpb_setRange(0, 100)
-        self.round_progressbar.rpb_setValue(0)
-        self.round_progressbar.rpb_setBarStyle('Line')
-        self.round_progressbar.rpb_enableText(False)
-        self.worker = Worker()
-        self.worker.updateProgress.connect(self.setProgress)
-        self.round_progressbar.minimum = 1
-        self.round_progressbar.maximum = 100
-        self.round_progressbar.show()
-        self.retranslateUi()
-    def setProgress(self, progress):
-        self.round_progressbar.rpb_setValue(progress)
+        th = threading.Thread(target=self.detection_plate)
+        th.start()
+
+    def setProgress(self):
+        self.label_detection.show()
 
     def retranslateUi(self):
         self.worker.start()
@@ -79,24 +77,6 @@ class Ui_MainWindow(object):
         self.button_start.clicked.connect(self.click_start)
         self.window.show()
         sys.exit(app.exec_())
-
-    def execute():
-        app = QtWidgets.QApplication(sys.argv)
-        Ui_MainWindow()
-
-class Worker(QtCore.QThread):
-    updateProgress = QtCore.Signal(int)
-    def __init__(self):
-        QtCore.QThread.__init__(self)
-
-    def run(self):
-        i = 1
-        while(True):
-            time.sleep(0.1)
-            self.updateProgress.emit(i)
-            if(i == 100):
-                i = 1
-            i += 1
 
 class execute():
     app = QtWidgets.QApplication(sys.argv)
