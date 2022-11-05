@@ -60,16 +60,27 @@ Uma reepresentação da arquitetura de pastas do projeto pode ser visto na estru
 **Importante**
 Para utilizar o repositório é necessário ter:
 * **Python 3** : utilizado o Python 3.11.0
+
     * Download [Versão 3.11.0 64bits](https://www.python.org/ftp/python/3.11.0/python-3.11.0-amd64.exe)
+    
     * Download [última versão](https://www.python.org/downloads/)
+    
 *  **PHP 8** : utilizado o PHP 8.1.12
+
      * Download [Versão PHP 8.1.12 64bits](https://windows.php.net/downloads/releases/php-8.1.12-nts-Win32-vs16-x64.zip)
+     
     * Download [última versão](https://www.php.net/downloads.php)
+    
 *  **PostgreSQL** : utilizado PostgreSQL Version 15
+
      * Download [Versão 15 64bits](https://www.enterprisedb.com/postgresql-tutorial-resources-training?uuid=7ce7e93f-e1eb-4e42-85fa-84c0c98859ee&campaignId=7012J000001h3GiQAI)
+     
     * Download [última versão](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+    
 * **Composer** :: utilizado versão Composer 2.4.4
+
     * Download [Versão  2.4.4 64bits](https://getcomposer.org/Composer-Setup.exe)
+    
     * Download [última versão](https://getcomposer.org/download/)
 
 Após instalado essas ferramentas, é necessário realizar o clone do repositório e instalar suas dependências.
@@ -119,5 +130,8 @@ Para executar o projeto web inicie o servidor PHP através do comando:
 php -S localhost:8080
 ```
 e navegue até o diretorio ``cerbero-mercosul/web/cerbero-web/web`` partindo do endereço `` http://localhost/``
+
+
+
 
 ``@author Rafael Almeida``
