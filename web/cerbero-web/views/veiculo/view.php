@@ -24,7 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'id',
                 'placa:ntext',
                 'data',
-                'imagem:ntext',
+                [
+                    'attribute' => 'imagem',
+                    'value' => 'data:image/jpg;base64,' . $model->imagem,
+                    'format' => ['image', ['width' => '100%', 'height' => '100%']]
+                ],
+               
             ],
         ]) ?>
 
