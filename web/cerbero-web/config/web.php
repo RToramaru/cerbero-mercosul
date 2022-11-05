@@ -65,7 +65,6 @@ $config = [
                 'actions' => ['login', 'error'],
                 'allow' => true,
             ],
-
             [
                 'actions' => ['logout', 'index', 'create', 'view', 'update', 'delete', 'about'], // add all actions to take guest to login page
                 'allow' => true,
