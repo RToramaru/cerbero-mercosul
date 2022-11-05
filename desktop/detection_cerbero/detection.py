@@ -138,7 +138,10 @@ class Detection(str):
                         self.image_resize = cv2.resize(self.img, (self.width_resize, self.height_resize), interpolation = cv2.INTER_AREA)
                         # converte a imagem para base64
                         _, self.encode_pjg = cv2.imencode('.jpg', self.image_resize)
-                        self.jpg_as_text = base64.b64encode(self.encode_pjg)
+                        self.im_bytes = self.encode_pjg.tobytes()
+                        self.jpg_as_text = base64.b64encode(self.im_bytes)
+                        self.jpg_as_text = str(self.jpg_as_text)
+                        self.jpg_as_text = self.jpg_as_text[2:-1]
                         # cria a query sql e insere os dados no banco de dados
                         self.sql = "INSERT INTO veiculo (placa, data, imagem) VALUES (%s, %s, %s)"
                         self.values = (self.plate_text, datetime.datetime.now(), self.jpg_as_text[1:])
