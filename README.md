@@ -59,9 +59,9 @@ Uma reepresentação da arquitetura de pastas do projeto pode ser visto na estru
 ## Clone do projeto
 **Importante**
 Para utilizar o repositório é necessário ter:
-* **Python 3** : utilizado o Python 3.11.0
+* **Python 3** : utilizado o Python 3.10.8
 
-    * Download [Versão 3.11.0 64bits](https://www.python.org/ftp/python/3.11.0/python-3.11.0-amd64.exe)
+    * Download [Versão 3.10.8 64bits](https://www.python.org/ftp/python/3.10.8/python-3.10.8-amd64.exe)
     
     * Download [última versão](https://www.python.org/downloads/)
     
