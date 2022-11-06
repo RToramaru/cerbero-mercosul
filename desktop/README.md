@@ -18,8 +18,6 @@ Nessa parte do processamento, é realizado a detecção de placas veiculares, pa
 
 ## Demostração
 
-<video src="demonstracao/demonstracao.mp4" controls="controls" style="max-width: 730px;">
-</video>
 
 
 ``@author Rafael Almeida``
