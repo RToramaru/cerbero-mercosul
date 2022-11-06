@@ -93,9 +93,10 @@ class Detection(str):
                     # converte a imagem para tons de cinza e procura os contornos
                     self.blank_image = cv2.cvtColor(self.blank_image, cv2.COLOR_BGR2GRAY)
                     self.contours, _ = cv2.findContours(self.blank_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                    self.contours_sort = sorted(self.contours, key=lambda ctr: cv2.boundingRect(ctr)[0])
                     self.result_character_image = np.zeros((self.height,10), np.uint8)
                     # obtem os contornos dos caracteres e uni os caracteres a uma unica imagem
-                    for cnt in self.contours:
+                    for cnt in self.contours_sort:
                         x, y, w, h = cv2.boundingRect(cnt)
                         self.character_image = self.th2[y:y+h, x:x+w]
                         self.character_image = cv2.copyMakeBorder(self.character_image, (self.height - h - 20), 20, 10, 10, cv2.BORDER_CONSTANT, None, value = (255,255,255))
@@ -118,18 +119,24 @@ class Detection(str):
                         self.plate_text_1.replace('0', 'O')
                         self.plate_text_1.replace('1', 'I')
                         self.plate_text_1.replace('5', 'S')
+                        self.plate_text_1.replace('7', 'Z')
 
                         self.plate_text_2.replace('O', '0')
                         self.plate_text_2.replace('I', '1')
                         self.plate_text_2.replace('S', '5')
+                        self.plate_text_2.replace('?', '7')
+                        self.plate_text_2.replace('Z', '7')
 
                         self.plate_text_3.replace('0', 'O')
                         self.plate_text_3.replace('1', 'I')
                         self.plate_text_3.replace('5', 'S')
+                        self.plate_text_3.replace('7', 'Z')
 
                         self.plate_text_4.replace('O', '0')
                         self.plate_text_4.replace('I', '1')
                         self.plate_text_4.replace('S', '5')
+                        self.plate_text_4.replace('?', '7')
+                        self.plate_text_4.replace('Z', '7')
 
                         self.plate_text = self.plate_text_1 + self.plate_text_2 + self.plate_text_3 + self.plate_text_4
                         # obtem a imagem em uma proporcao menor
