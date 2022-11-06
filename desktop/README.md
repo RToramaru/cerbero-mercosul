@@ -20,4 +20,8 @@ Nessa parte do processamento, é realizado a detecção de placas veiculares, pa
 
 
 
+https://user-images.githubusercontent.com/42619833/200175973-1d314364-0327-4ac6-bb61-6ab71bdc12e8.mp4
+
+
+
 ``@author Rafael Almeida``
