@@ -116,27 +116,27 @@ class Detection(str):
                         self.plate_text_3 = self.plate_text[4]
                         self.plate_text_4 = self.plate_text[5:]
 
-                        self.plate_text_1.replace('0', 'O')
-                        self.plate_text_1.replace('1', 'I')
-                        self.plate_text_1.replace('5', 'S')
-                        self.plate_text_1.replace('7', 'Z')
+                        self.plate_text_1 = self.plate_text_1.replace('0', 'O')
+                        self.plate_text_1 = self.plate_text_1.replace('1', 'I')
+                        self.plate_text_1 = self.plate_text_1.replace('5', 'S')
+                        self.plate_text_1 = self.plate_text_1.replace('7', 'Z')
 
-                        self.plate_text_2.replace('O', '0')
-                        self.plate_text_2.replace('I', '1')
-                        self.plate_text_2.replace('S', '5')
-                        self.plate_text_2.replace('?', '7')
-                        self.plate_text_2.replace('Z', '7')
+                        self.plate_text_2 = self.plate_text_2.replace('O', '0')
+                        self.plate_text_2 = self.plate_text_2.replace('I', '1')
+                        self.plate_text_2 = self.plate_text_2.replace('S', '5')
+                        self.plate_text_2 = self.plate_text_2.replace('?', '7')
+                        self.plate_text_2 = self.plate_text_2.replace('Z', '7')
 
-                        self.plate_text_3.replace('0', 'O')
-                        self.plate_text_3.replace('1', 'I')
-                        self.plate_text_3.replace('5', 'S')
-                        self.plate_text_3.replace('7', 'Z')
+                        self.plate_text_3 = self.plate_text_3.replace('0', 'O')
+                        self.plate_text_3 = self.plate_text_3.replace('1', 'I')
+                        self.plate_text_3 = self.plate_text_3.replace('5', 'S')
+                        self.plate_text_3 = self.plate_text_3.replace('7', 'Z')
 
-                        self.plate_text_4.replace('O', '0')
-                        self.plate_text_4.replace('I', '1')
-                        self.plate_text_4.replace('S', '5')
-                        self.plate_text_4.replace('?', '7')
-                        self.plate_text_4.replace('Z', '7')
+                        self.plate_text_4 = self.plate_text_4.replace('O', '0')
+                        self.plate_text_4 = self.plate_text_4.replace('I', '1')
+                        self.plate_text_4 = self.plate_text_4.replace('S', '5')
+                        self.plate_text_4 = self.plate_text_4.replace('?', '7')
+                        self.plate_text_4 = self.plate_text_4.replace('Z', '7')
 
                         self.plate_text = self.plate_text_1 + self.plate_text_2 + self.plate_text_3 + self.plate_text_4
                         # obtem a imagem em uma proporcao menor
